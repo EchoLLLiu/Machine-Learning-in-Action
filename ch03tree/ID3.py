@@ -40,7 +40,7 @@ def chooseBestFeatureToSplit(dataSet):
 	# 计算总特征数，数据集最后一列为分类标签。dataSet[0]是指第一条数据
 	numFeatures = len(dataSet[0]) - 1
 	# 按照分类标签计算香农熵
-	# baseEntropy基准香农熵，即保留所有特征所计算的值；用于计算信息增益
+	# baseEntropy为经验熵H(D)
 	baseEntropy = calcShannonEnt(dataSet)
 	bestInfoGain = 0.0
 	bestFeaature = -1
@@ -48,6 +48,7 @@ def chooseBestFeatureToSplit(dataSet):
 	for i in range(numFeatures):
 		featList = [example[i] for example in dataSet]
 		uniqueVals = set(featList)
+		# newEntropy为经验条件熵H(D|A)
 		newEntropy = 0.0
 		# 计算每种划分方式的信息熵，并求该feature熵和
 		for value in uniqueVals:
@@ -56,6 +57,7 @@ def chooseBestFeatureToSplit(dataSet):
 			# len(subDataSet)表示feature[i]=value的条目总数
 			prob = len(subDataSet)/float(len(dataSet))
 			newEntropy += prob * calcShannonEnt(subDataSet)
+		# 信息增益：g(D,A) = H(D) - H(D|A)
 		inforGain = baseEntropy - newEntropy
 		if inforGain > bestInfoGain:
 			bestInfoGain = inforGain
