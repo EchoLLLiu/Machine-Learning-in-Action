@@ -55,7 +55,7 @@ def find_nearest(tree, point):
             return result([0] * k, float("inf"), 0)
         nodes_visited = 1
         s = kd_node.split          # 进行分割的维度
-        pivot = kd_node.dom_elt    # 进行分割的轴
+        pivot = kd_node.dom_elt    # 进行分割的节点
         # 找到离目标点最近的节点
         if target[s] <= pivot[s]:
             nearest_node = kd_node.left
@@ -78,9 +78,11 @@ def find_nearest(tree, point):
         # 第s维上目标点与分割超平面的距离
         temp_dist = abs(pivot[s] - target[s])
         # 判断超球体是否与超平面相交
+        # 如果不相交，则该点即为最近点
         if max_dist < temp_dist:
             return result(nearest, dist, nodes_visited)
 
+        # 如果超球体与超平面相交，则在相交的区域中可能存在更近点
         # 计算目标点与分割点的欧氏距离
         temp_dist = sqrt(sum((p1 - p2) ** 2 for p1,p2 in zip(pivot, target)))
 
@@ -104,29 +106,29 @@ def find_nearest(tree, point):
 
 #---------------------------------测试结果----------------------------------
 
-# from time import clock
-# from random import random
+from time import clock
+from random import random
 
-# # 产生一个k维随机向量，每维分量值在0~1之间
-# def random_point(k):
-#     return [random() for _ in range(k)]
+# 产生一个k维随机向量，每维分量值在0~1之间
+def random_point(k):
+    return [random() for _ in range(k)]
  
-# # 产生n个k维随机向量 
-# def random_points(k, n):
-#     return [random_point(k) for _ in range(n)]       
+# 产生n个k维随机向量 
+def random_points(k, n):
+    return [random_point(k) for _ in range(n)]       
       
-# if __name__ == "__main__":
-#     data = [[2,3],[5,4],[9,6],[4,7],[8,1],[7,2]]  # samples
+if __name__ == "__main__":
+    data = [[2,3],[5,4],[9,6],[4,7],[8,1],[7,2]]  # samples
     
-#     kd = KdTree(data)
+    kd = KdTree(data)
     
-#     ret = find_nearest(kd, [3,4.5])
-#     print(ret)
+    ret = find_nearest(kd, [3,4.5])
+    print(ret)
 
-#     N = 400000
-#     kd2 = KdTree(random_points(3, N))            # 构建包含四十万个3维空间样本点的kd树
-#     t0 = clock()
-#     ret2 = find_nearest(kd2, [0.1,0.5,0.8])      # 四十万个样本点中寻找离目标最近的点
-#     t1 = clock()
-#     print("time: ",t1-t0, "s")
-#     print(ret2)
+    # N = 400000
+    # kd2 = KdTree(random_points(3, N))            # 构建包含四十万个3维空间样本点的kd树
+    # t0 = clock()
+    # ret2 = find_nearest(kd2, [0.1,0.5,0.8])      # 四十万个样本点中寻找离目标最近的点
+    # t1 = clock()
+    # print("time: ",t1-t0, "s")
+    # print(ret2)
