@@ -2,6 +2,7 @@
 from math import log
 import operator
 
+# C4.5算法与ID3算法仅有细微差别，其差别与代码在注释中体现
 #-------------------------------------构造决策树-----------------------------------------
 # 计算给定数据集的香农熵
 def calcShannonEnt(dataSet):
@@ -57,8 +58,12 @@ def chooseBestFeatureToSplit(dataSet):
 			# len(subDataSet)表示feature[i]=value的条目总数
 			prob = len(subDataSet)/float(len(dataSet))
 			newEntropy += prob * calcShannonEnt(subDataSet)
+			# (C4.5)分裂信息：splitInfo
+			# splitInfo -= prob * log(prob, 2)
 		# 信息增益：g(D,A) = H(D) - H(D|A)
 		inforGain = baseEntropy - newEntropy
+		# (C4.5)信息增益率
+		# inforGainRate = inforGain / splitInfo 
 		if inforGain > bestInfoGain:
 			bestInfoGain = inforGain
 			bestFeaature = i
