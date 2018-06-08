@@ -8,10 +8,12 @@
 &emsp;&emsp;&emsp;kNN.py ：knn算法的实现<br/>
 &emsp;&emsp;&emsp;kdTree.py ：kd树以及kd搜索树算法的实现<br/>
 &emsp;&emsp;&emsp;小例子 ：约会网站预测、数字识别<br/>
+&emsp;&emsp;&emsp;详解：https://www.cnblogs.com/lliuye/p/8981586.html<br/>
 
 #### ch03 : 决策树<br/>
 &emsp;&emsp;&emsp;ID3_C45.py：ID3以及C4.5算法的实现<br/>
 &emsp;&emsp;&emsp;小例子 ：预测隐形眼镜类型<br/>
+&emsp;&emsp;&emsp;详解：https://www.cnblogs.com/lliuye/p/9008901.html<br/>
 
 #### ch04 : 朴素贝叶斯<br/>
 &emsp;&emsp;&emsp;bayes.py ：朴素贝叶斯算法的实现<br/>
